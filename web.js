@@ -75,11 +75,11 @@ overFiveTime.setMinutes(overFiveTime.getMinutes() + 5)
 overFiveTime = overFiveTime.getTime();
 
 const scheduleAlarm = () => {
-        if (parseInt(process.env.INSTANCE_ID) != 3) {
+        if (parseInt(process.env.INSTANCE_ID) != 7) {
                 return;
         }
         schedule.scheduleJob('0 0/1 * * * *', async function () {
-
+                console.log('scheduleAlarm')
                 let date = returnMoment().substring(0, 10);
                 let dayOfWeek = new Date(date).getDay()
                 let result = await dbQueryList(`SELECT * FROM alarm_table WHERE ((DATEDIFF(?, start_date) >= 0 AND days LIKE '%${dayOfWeek}%' AND type=1) OR ( start_date=? AND type=2 )) AND STATUS=1`, [date, date]);
