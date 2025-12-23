@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
         console.log("back-end initialized")
         res.send('back-end initialized')
 });
-const is_test = true;
+const is_test = process.env.IS_TEST;
 app.connectionsN = 0;
 const HTTP_PORT = 8001;
 const HTTPS_PORT = 8443;
@@ -102,7 +102,7 @@ const scheduleAlarm = () => {
         })
 }
 let server = undefined
-if (is_test) {
+if (is_test == 1) {
         server = http.createServer(app).listen(HTTP_PORT, function () {
                 console.log("Server on " + HTTP_PORT)
         });
